@@ -1,0 +1,107 @@
+#service-definition.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingress-service
+  namespace: ingress-namespace
+spec:
+    type: NodePort
+    ports:
+    - port: 8080
+      targetPort: http-webapp-svc
+      protocol: TCP
+      nodePort: 30080
+    selector:
+      app: nginx-webapp
+      type: ingress
+---
+#deployment-definition.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingress-deployment
+  namespace: ingress-namespace
+  labels:
+    app: nginx-webapp
+    type: ingress
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+     app: nginx-webapp
+     type: ingress
+  template:
+    metadata:
+      labels:
+        app: nginx-webapp
+        type: ingress
+    spec:
+     containers:
+     - name: nginx
+       image: nginx:latest
+       ports:
+       - containerPort: 8080
+         name: http-webapp-svc
+       volumeMounts:
+        - mountPath: /etc/nginx/
+          name: data-volume
+     volumes:
+      - name: data-volume
+        configMap:
+         name: ingress-configmap
+         items:
+          - key: nginx.conf
+            path: nginx.conf
+
+---
+#configmap-definition.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-configmap
+  namespace: ingress-namespace
+  labels:
+    app: nginx-webapp
+    type: ingress
+data:
+  nginx.conf: '
+  events {
+  }
+  http {
+  server {
+    listen       8080;
+    location / {
+      return 200 "Hello world!";
+    }
+  }
+}
+'
+---
+#ingress-definition.yml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-config
+  namespace: ingress-namespace
+  labels:
+    app: nginx-webapp
+    type: ingress
+spec:
+  rules:
+    - host: football-world.info
+      http:
+        paths:
+          - path: /football
+            pathType: Prefix
+            backend:
+              service:
+                name: football-service
+                port:
+                  number: 8080
+          - path: /boot
+            pathType: Prefix
+            backend:
+              service:
+                name: boot-service
+                port:
+                  number: 8080
