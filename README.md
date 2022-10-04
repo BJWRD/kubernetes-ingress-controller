@@ -4,7 +4,7 @@ This is a Kubernetes Ingress-Controller Service which routes requests to /footba
 ## Architecture
 This K8s architecture consists of one Node and two Pods using 2 Deployments , 2 ConfigMaps, 2 NodePort Services and an Ingress-Controller service for external site accessibility. The Node will reside within the Namespace `ingress-namespace` and the bulk of the configuration can be found within the `kubernetes-ingress-controller.yml`.
 
-<img width="690" alt="image" src="https://user-images.githubusercontent.com/83971386/193107498-5da74aa9-64b3-4a70-92a9-c9d438e9866b.png">
+<img width="799" alt="image" src="https://user-images.githubusercontent.com/83971386/193860312-a5b79d82-d7b0-4124-94aa-8ae07e984620.png">
 
 ## How to Apply/Destroy
 This section details the deployment and teardown of the kubernetes-simple-webapp architecture. 
@@ -33,7 +33,7 @@ This section details the deployment and teardown of the kubernetes-simple-webapp
 ### 6. Verify the Minikube's external IP address and service list
      minikube ip
      minikube service list
-<img width="583" alt="image" src="https://user-images.githubusercontent.com/83971386/193108264-210fc8f2-f661-4897-ae40-3f5986fa65ce.png">
+<img width="738" alt="image" src="https://user-images.githubusercontent.com/83971386/193860482-5e5ca6f5-f8b8-42a7-b42c-561d1c2f49db.png">
 
 ### 7. Add the following line to the bottom of the /etc/hosts file on your computer to allow hostname (you will need sudoer permission).
       sudo vi /etc/hosts
