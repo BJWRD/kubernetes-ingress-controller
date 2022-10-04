@@ -168,17 +168,17 @@ metadata:
     type: ingress
 spec:
   rules:
-    - host: soccer-world.info
+    - host: soccer-world
       http:
         paths:
-          - path: /football
+          - path: /footballs
             pathType: Prefix
             backend:
               service:
                 name: football-service
                 port:
                   number: 8080
-          - path: /boot
+          - path: /boots
             pathType: Prefix
             backend:
               service:
