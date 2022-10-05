@@ -46,12 +46,10 @@ This section details the deployment and teardown of the kubernetes-simple-webapp
 - Also, try from a web browser specifying the following -
 
       http://soccer-world/footballs
-      
-      
-      
+      "Hello World! This is the Soccer-World Footballs Page!"
       
       http://soccer-world/boots
-      
+      "Hello World! This is the Soccer-World Boots Page!"
 
 ### Teardown steps
 
