@@ -3,5 +3,5 @@ kind: Namespace
 metadata:
   name: ingress-namespace
   labels:
-    app: nginx-webapp
-    type: ingress
+    app: ingress-services
+    type: ingress-namespace

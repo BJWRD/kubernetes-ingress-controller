@@ -1,5 +1,7 @@
+#kubernetes-ingress-controller.yml
+
 #service-definition.yml
-#service 1
+#football-service
 apiVersion: v1
 kind: Service
 metadata:
@@ -16,7 +18,7 @@ spec:
       app: football-service
       type: ingress-deployment
 ---
-#service 2
+#boot-service
 apiVersion: v1
 kind: Service
 metadata:
@@ -34,6 +36,7 @@ spec:
       type: ingress-deployment2
 ---
 #deployment-definition.yml
+#football-service
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -71,7 +74,8 @@ spec:
           - key: nginx.conf
             path: nginx.conf
 ---
-#Deployment 2
+#deployment-definition.yml
+#boot-service
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -110,6 +114,7 @@ spec:
             path: nginx.conf
 ---
 #configmap-definition.yml
+#football-service
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -126,13 +131,14 @@ data:
   server {
     listen       8080;
     location / {
-      return 200 "Hello world!";
+      return 200 "Hello World! This is the Soccer-World Footballs Page!";
     }
   }
 }
 '
 ---
-#configmap 2
+#configmap-definition.yml
+#boot-service
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -149,13 +155,13 @@ data:
   server {
     listen       8080;
     location / {
-      return 200 "Hello world222222!";
+      return 200 "Hello World! This is the Soccer-World Boots Page!";
     }
   }
 }
 '
 ---
-#ingress-definition.yml
+#ingress-controller-definition.yml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
